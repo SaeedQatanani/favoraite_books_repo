@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Books</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/styling.css' %}">
+</head>
+<body>
+    <header class="navbar navbar-primary bg-dark">
+        <h2>Welcome, <a href="/books/show_user_profile/">{{ request.session.first_name }}</a>!</h2>
+        <p class="link_container"><a href="/logout/" class="navbar_link">Log out</a></p>
+    </header>
+    <main>
+        <section>
+            <form action="/books/upload_book/" method="post">
+                {% csrf_token %}
+                <h3>Add a Favorite Book</h3>
+                <div class="form-group row">
+                    <label for="title" class="col-sm-4 col-form-label">Title</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="title" id="title"  class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="desc" class="col-sm-4 col-form-label">Description</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="desc" id="desc"  class="form-control">
+                    </div>
+                </div>
+                <button id="button" type="submit" class="btn btn-outline-primary">Add</button>
+            </form>
+        </section>
+        <section class="books_section">
+            <h3>All Books</h3>
+            {% for book in all_books %}
+            <div class="book">
+                <h5><strong><a href="/books/{{book.id}}/">{{ book.title }}</a></strong></h5>
+                <p>(added by {{ book.uploaded_by.first_name }} {{ book.uploaded_by.last_name }})</p>
+                {% if book in liked_books %}
+                <p>this is one of your favorites</p>
+                {% else %}
+                <p><a href="/books/add_to_favorites/{{book.id}}/">Add to Favorites</a></p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </section>
+    </main>
+    <footer>
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </footer>
+</body>
+</html>

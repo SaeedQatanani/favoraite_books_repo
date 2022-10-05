@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-family: sans-serif;
+}
+
+header {
+    margin: 1%;
+    padding: 1%;
+    color: antiquewhite;
+}
+
+.link_container {
+    margin: 1% 0;
+}
+
+.navbar_link {
+    color: antiquewhite;
+}
+
+main {
+    display: flex;
+}
+
+section {
+    margin: 1%;
+    padding: 1%;
+    flex: 1;
+    text-align: center;
+}
+
+.book_show {
+    text-align: left;
+}
+
+.books_section {
+    margin-left: 10%;
+}
+
+div,h3 {
+    text-align: left;
+    margin: 1% 0;
+}
+
+.book {
+    margin: 4% 0;
+}
+
+p {
+    margin: 0;
+}
+
+footer {
+    margin: 1%;
+    padding: 1%;
+}
+
+.messages {
+    color: red;
+}
+
+form {
+    margin: 1%;
+    padding: 1%;
+}
